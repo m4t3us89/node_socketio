@@ -1,5 +1,5 @@
 const moongose = require('../config/database')
-const crypto = require('crypto')
+const bcrypt = require('bcrypt')
 
 const User = new moongose.Schema({
     profile: {
@@ -17,7 +17,8 @@ const User = new moongose.Schema({
     email:{
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        lowercase: true,
     },
     username: {
         type: String,
@@ -27,13 +28,16 @@ const User = new moongose.Schema({
     password: {
         type: String,
         required: true,
+        //select: false,
     }
 },{
     timestamps: true
 })
 
-User.pre('save' , async function(next){
-    this.password = await crypto.scrypt(this.password, 'salt' , '24')
+
+User.pre('save' ,  async function(next){
+    const salt = await bcrypt.genSalt(10)
+    this.password =  await bcrypt.hash(this.password, salt)
     return next()
 })
 

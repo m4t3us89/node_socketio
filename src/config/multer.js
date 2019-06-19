@@ -7,7 +7,7 @@ const multerS3 = require("multer-s3");
 const storageTypes = {
   local: multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null,path.resolve(__dirname, "..", "..", process.env.DIR_UPLOAD , process.env.DIR_UPLOAD_SUB));
+      cb(null,path.resolve(__dirname, "..", "..", process.env.DIR_UPLOAD ));
     },
     filename: (req, file, cb) => {
       crypto.randomBytes(16, (err, hash) => {

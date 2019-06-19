@@ -1,4 +1,6 @@
 const UserModel = require('./model')
+const fs = require('fs')
+const path = require('path')
 
 class User{
 
@@ -18,6 +20,9 @@ class User{
             user.password = undefined
             return res.status(201).json(user)
         }catch(err){
+            fs.unlinkSync(
+                `${path.resolve(__dirname,'..','..','tmp')}/${req.file.key}`
+            )
             return res.status(400).json(err)
         }
     }
