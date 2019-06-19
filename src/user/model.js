@@ -28,7 +28,7 @@ const User = new moongose.Schema({
     password: {
         type: String,
         required: true,
-        //select: false,
+        select: false,
     }
 },{
     timestamps: true

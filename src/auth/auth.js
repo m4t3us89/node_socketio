@@ -8,7 +8,7 @@ class Auth{
             const {username,password} = req.body
             const user = await User.findOne({
                 username
-            })
+            }).select('+password')
            
             if(user){
                
