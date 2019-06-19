@@ -18,9 +18,11 @@ class Auth{
                     user.password = undefined
                     return res.status(201).json({user,token})
 
-                }else return res.status(400).json({message:'Password incorreto.'})
+                }else 
+                    return res.status(400).json({message:'Password incorreto.'})
                 
-            }else return res.status(400).json({message:'Usuário não identificado.'})
+            }else 
+                return res.status(400).json({message:'Usuário não identificado.'})
 
            
         }catch(err){

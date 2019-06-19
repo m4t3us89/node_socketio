@@ -8,7 +8,8 @@ module.exports = async (req,res,next) => {
             if(!await jwt.verify(token,'shhhhh'))
                 return res.status(401).json({message:'Token não válido.'})
 
-        }else return res.status(401).json({message:'Token não informado.'})
+        }else 
+            return res.status(401).json({message:'Token não informado.'})
         
         return next()
     }catch(err){
